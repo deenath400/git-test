@@ -1,0 +1,31 @@
+name: Test workflow
+
+on:
+  push:
+    branches: ["master"]
+  workflow_dispatch:
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: step1
+        run: |
+          echo "I'm in job 1 and and stage 1"
+
+      - name: step2
+        run: |
+          echo "I'm in job 1 and and stage 2"
+
+  job2:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: step1
+        run: |
+          echo "I'm in job 2 and and stage 1"
+
+      - name: step2
+        run: |
+          echo "I'm in job 2 and and stage 2"
