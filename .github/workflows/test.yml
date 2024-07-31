@@ -3,9 +3,28 @@ name: Test workflow
 on:
   push:
     branches: ["master"]
+  paths:
+    - "be/**"
+    - "fe/**"
+    - "**"
   workflow_dispatch:
 
 jobs:
+  be:
+    runs-on: ubuntu-latest
+    if: ${{ contains( github.event.head_commit.modified, 'be/') }}
+    steps:
+      - name: Be test
+        run: |
+          echo "BE change detected"
+
+  fe:
+    runs-on: ubuntu-latest
+    if: ${{ contains( github.event.head_commit.modified, 'fe/') }}
+    steps:
+      - name: Fe test
+        run: |
+          echo "FE change detected"
   job1:
     runs-on: ubuntu-latest
 
