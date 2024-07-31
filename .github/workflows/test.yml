@@ -6,7 +6,6 @@ on:
     paths:
       - "be/**"
       - "fe/**"
-      - "**"
   workflow_dispatch:
 
 jobs:
