@@ -3,10 +3,10 @@ name: Test workflow
 on:
   push:
     branches: ["master"]
-  paths:
-    - "be/**"
-    - "fe/**"
-    - "**"
+    paths:
+      - "be/**"
+      - "fe/**"
+      - "**"
   workflow_dispatch:
 
 jobs:
