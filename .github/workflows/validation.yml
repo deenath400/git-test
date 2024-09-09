@@ -3,6 +3,8 @@ name: Check for Task Link in Comments
 on:
   pull_request:
     types: [opened, edited, reopened]
+  issue_comment:
+    types: [created]
 
 jobs:
   check-task-link:
