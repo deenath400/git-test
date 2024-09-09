@@ -27,6 +27,7 @@ jobs:
         id: check_task_link
         run: |
           echo "Checking comments for task links..."
+          echo ${{steps.fetch_comments.outputs.result}}
           if [[ $(echo "${{ steps.fetch_comments.outputs.result }}" | grep -Eo 'https://digital400.atlassian.net/browse/[A-Z]+-[0-9]+') ]]; then
             echo "Task link found."
           else
