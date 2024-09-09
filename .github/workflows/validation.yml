@@ -1,4 +1,4 @@
-name: Custom Check
+name: Custom-Check
 
 on:
   pull_request:
