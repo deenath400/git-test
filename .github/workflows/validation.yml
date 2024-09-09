@@ -3,7 +3,7 @@ name: Custom Check
 on:
   pull_request:
     types: [opened, edited, reopened, synchronize]
-
+  workflow_dispatch:
 jobs:
   check-task-link:
     runs-on: ubuntu-latest
