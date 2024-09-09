@@ -1,0 +1,35 @@
+name: Check for Task Link in Comments
+
+on:
+  pull_request:
+    types: [opened, edited, reopened]
+
+jobs:
+  check-task-link:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Get pull request comments
+        uses: actions/github-script@v6
+        id: fetch_comments
+        with:
+          script: |
+            const comments = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number
+            });
+            return comments.data;
+
+      - name: Check if task link is present in comments
+        id: check_task_link
+        run: |
+          echo "Checking comments for task links..."
+          if [[ $(echo "${{ steps.fetch_comments.outputs.result }}" | grep -Eo 'https://digital400.atlassian.net/browse/[A-Z]+-[0-9]+') ]]; then
+            echo "Task link found."
+          else
+            echo "No task link found."
+            exit 1  # Fail the job if no task link is found
+          fi
