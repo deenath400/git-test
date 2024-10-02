@@ -1,0 +1,16 @@
+name: Database Auto Schema Migration
+
+on:
+  push:
+    branches: ["msbuild_test"]
+  workflow_dispatch:
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: install msbuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Check msbuild
+        run: msbuild
