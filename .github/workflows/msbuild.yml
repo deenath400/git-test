@@ -20,7 +20,7 @@ jobs:
           $connectionPatern = '<TargetConnectionString>.*?</TargetConnectionString>'
           $targetDatabasePattern = '<TargetDatabaseName>.*?</TargetDatabaseName>'
           $connnection = '<TargetConnectionString>${{secrets.COMMON_DB_CONNECTION}}</TargetConnectionString>'
-          $targetDatabase = common-db
+          $targetDatabase = 'common-db'
           $fileContent = $fileContent `
               -replace $connectionPattern, $connection `
               -replace $targetDatabasePattern, $targetDatabase
