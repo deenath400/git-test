@@ -9,8 +9,23 @@ jobs:
   migrate:
     runs-on: windows-latest
     steps:
-      - name: install msbuild
+      - name: Install Ms-build
         uses: microsoft/setup-msbuild@v2
 
-      - name: Check msbuild
-        run: msbuild
+      - uses: actions/checkout@v4
+
+      - name: Replace Connection Strings in CommonDb Db Project
+        run: |
+          $commonDbConnectionPath = "./ISO-Automation-BE/ISEC.Database/ISEC.Database_1.publish.xml"
+          $connectionPatern = '<TargetConnectionString>.*?</TargetConnectionString>'
+          $targetDatabasePattern = '<TargetDatabaseName>.*?</TargetDatabaseName>'
+          $connnection = <TargetConnectionString>${{secrets.COMMON_DB_CONNECTION}}</TargetConnectionString>
+          $targetDatabase = common-db
+          $fileContent = $fileContent `
+              -replace $connectionPattern, $connection `
+              -replace $targetDatabasePattern, $targetDatabase
+          Set-Content -Path $commonDbConnectionPath -Value $fileContent
+
+      - name: Publish Db Changes
+        run: |
+          MSBUILD "ISO-Automation-BE/ISEC.Database/ISEC.Database.sqlproj" /t:Publish /p:SqlPublishProfilePath="./ISEC.Database_1.publish.xml"
