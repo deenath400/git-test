@@ -3,6 +3,8 @@ name: Database Auto Schema Migration
 on:
   push:
     branches: ["msbuild_test"]
+    paths:
+      - "ISO-Automation-BE/ISEC.Database/**"
   workflow_dispatch:
 
 jobs:
