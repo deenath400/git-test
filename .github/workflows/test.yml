@@ -10,7 +10,7 @@ on:
 
 jobs:
   be:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     if: ${{ contains( github.event.head_commit.modified, 'be/') }}
     steps:
       - name: Be test
