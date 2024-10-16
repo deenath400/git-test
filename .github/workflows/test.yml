@@ -10,7 +10,7 @@ on:
 
 jobs:
   be:
-    runs-on: self-hosted
+    runs-on: noobie-runner
     if: ${{ contains( github.event.head_commit.modified, 'be/') }}
     steps:
       - name: Be test
@@ -18,14 +18,14 @@ jobs:
           echo "BE change detected"
 
   fe:
-    runs-on: self-hosted
+    runs-on: noobie-runner
     if: ${{ contains( github.event.head_commit.modified, 'fe/') }}
     steps:
       - name: Fe test
         run: |
           echo "FE change detected"
   job1:
-    runs-on: self-hosted
+    runs-on: noobie-runner
 
     steps:
       - name: step1
@@ -37,7 +37,7 @@ jobs:
           echo "I'm in job 1 and and stage 2"
 
   job2:
-    runs-on: self-hosted
+    runs-on: noobie-runner
     needs: job1
     environment:
       name: dev
@@ -52,7 +52,7 @@ jobs:
           echo "I'm in job 2 and and stage 2"
 
   job3:
-    runs-on: self-hosted
+    runs-on: noobie-runner
     needs: job2
     environment:
       name: deploy
