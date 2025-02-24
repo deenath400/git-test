@@ -19,10 +19,6 @@ jobs:
         with:
           fetch-depth: 0 # Ensures all branches are available
 
-      - name: Run Flow
-        run: |
-          sed -i 's|<GOOGLE_CREDENTIALS_JSON>|${{secrets.GOOGLE_CREDENTIALS_JSON}}|g' appsettings.json
-
       - name: Configure Git
         run: |
           git config --global user.name "deenath400"
@@ -31,6 +27,10 @@ jobs:
       - name: Create or Switch to Output Branch
         run: |
           git checkout -B output-branch
+
+      - name: Run Flow
+        run: |
+          sed -i 's|<GOOGLE_CREDENTIALS_JSON>|${{secrets.GOOGLE_CREDENTIALS_JSON}}|g' appsettings.json
 
       - name: Update Remote URL
         env:
