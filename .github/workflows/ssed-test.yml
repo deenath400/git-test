@@ -31,7 +31,10 @@ jobs:
           git checkout -B output-branch
 
       - name: Commit and Push Changes
+        env:
+          GH_TOKEN: ${{ secrets.ACTIONS_DEPLOY_KEY }}
         run: |
+          git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/deenath400/git-test.git
           git add .
           git commit -m "Automated: Run Flow Output : ${{ github.sha }}" || echo "No changes to commit"
           git push origin output-branch
