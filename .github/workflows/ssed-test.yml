@@ -32,12 +32,12 @@ jobs:
         run: |
           git checkout -B output-branch
 
-          - name: Update Remote URL
-          env:
-            GH_PAT: ${{ secrets.YOUR_PAT_SECRET }}
-          run: |
-            git remote set-url origin https://x-access-token:${GH_PAT}@github.com/deenath400/git-test.git
-            git remote -v
+      - name: Update Remote URL
+        env:
+          GH_PAT: ${{ secrets.YOUR_PAT_SECRET }}
+        run: |
+          git remote set-url origin https://x-access-token:${GH_PAT}@github.com/deenath400/git-test.git
+          git remote -v
 
       - name: Push Changes to Branch
         run: |
