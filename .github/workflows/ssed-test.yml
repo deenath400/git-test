@@ -37,7 +37,7 @@ jobs:
           git commit -m "Automated: Run Flow Output : ${{ github.sha }}" || echo "No changes to commit"
 
       - name: Add Remote
-        run: git remote set test https://x-access-token:${{ secrets.ACTIONS_DEPLOY_KEY }}@github.com/deenath400/git-test.git
+        run: git remote add test https://x-access-token:${{ secrets.ACTIONS_DEPLOY_KEY }}@github.com/deenath400/git-test.git
 
       - name: Show Git remote URL
         run: git remote -v
