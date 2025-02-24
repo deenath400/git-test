@@ -19,6 +19,10 @@ jobs:
         with:
           fetch-depth: 0 # Ensures all branches are available
 
+      - name: Run Flow
+        run: |
+          sed -i 's|<GOOGLE_CREDENTIALS_JSON>|${{secrets.GOOGLE_CREDENTIALS_JSON}}|g' appsettings.json
+
       - name: Configure Git
         run: |
           git config --global user.name "deenath400"
@@ -28,17 +32,12 @@ jobs:
         run: |
           git checkout -B output-branch
 
-      - name: Run Flow
-        run: |
-          sed -i 's|<GOOGLE_CREDENTIALS_JSON>|${{secrets.GOOGLE_CREDENTIALS_JSON}}|g' appsettings.json
-
-      - name: Update Remote URL
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          author_name: "Your Name"
+          author_email: "your-email@example.com"
+          message: "Automated: Run Flow Output"
+          new_branch: output-branch
         env:
-          GH_PAT: ${{ secrets.YOUR_PAT_SECRET }}
-        run: |
-          git remote set-url origin https://x-access-token:${GH_PAT}@github.com/deenath400/git-test.git
-          git remote -v
-
-      - name: Push Changes to Branch
-        run: |
-          git push origin output-branch --force
+          GITHUB_TOKEN: ${{ secrets.YOUR_PAT_SECRET }}
