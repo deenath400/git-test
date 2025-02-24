@@ -21,7 +21,7 @@ jobs:
 
       - name: Run Flow
         run: |
-          sed -i 's|<GOOGLE_CREDENTIALS_JSON>|$(echo "${{secrets.GOOGLE_CREDENTIALS_JSON}}" | sed 's/[&/\]/\\&/g')|g' appsettings.json
+          sed -i "s|<GOOGLE_CREDENTIALS_JSON>|$(echo "${{secrets.GOOGLE_CREDENTIALS_JSON}}" | sed 's/[&/\]/\\&/g')|g" appsettings.json
 
       - name: Configure Git
         run: |
