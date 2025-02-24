@@ -39,5 +39,6 @@ jobs:
           author_email: "your-email@example.com"
           message: "Automated: Run Flow Output"
           new_branch: output-branch
+          force_push: true
         env:
           GITHUB_TOKEN: ${{ secrets.YOUR_PAT_SECRET }}
