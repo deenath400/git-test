@@ -30,17 +30,12 @@ jobs:
         run: |
           git checkout -B output-branch
 
-      - name: Commit
-        run: |
-          git remote -v
-          git add .
-          git commit -m "Automated: Run Flow Output : ${{ github.sha }}" || echo "No changes to commit"
-
-      - name: Add Remote
-        run: git remote add test https://x-access-token:${{ secrets.ACTIONS_DEPLOY_KEY }}@github.com/deenath400/git-test.git
-
-      - name: Show Git remote URL
-        run: git remote -v
-
-      - name: Add Remote
-        run: git push test output-branch --verbose
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          author_name: "Your Name"
+          author_email: "your-email@example.com"
+          message: "Automated: Run Flow Output"
+          branch: output-branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.YOUR_PAT_SECRET }}
