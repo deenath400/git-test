@@ -43,4 +43,4 @@ jobs:
         run: git remote -v
 
       - name: Add Remote
-        run: git push test output-branch
+        run: git push test output-branch --verbose
