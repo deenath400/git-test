@@ -1,0 +1,37 @@
+name: Run Flow and Commit Output
+
+on:
+  push:
+    branches:
+      - test-sed
+      - master
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  run-flow:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Ensures all branches are available
+
+      - name: Run Flow
+        run: |
+          sed -i 's|<GOOGLE_CREDENTIALS_JSON>|${{secrets.GOOGLE_CREDENTIALS_JSON}}|g' appsettings.json
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Create or Switch to Output Branch
+        run: |
+          git checkout -B output-branch
+
+      - name: Commit and Push Changes
+        run: |
+          git add .
+          git commit -m "Automated: Run Flow Output : ${{ github.sha }}" || echo "No changes to commit"
+          git push origin output-branch
