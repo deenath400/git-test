@@ -2,66 +2,17 @@ name: Test workflow
 
 on:
   push:
-    branches: ["master"]
-    paths:
-      - "be/**"
-      - "fe/**"
+    branches: ["test"]
   workflow_dispatch:
 
 jobs:
   be:
-    runs-on: noobie-runner
-    if: ${{ contains( github.event.head_commit.modified, 'be/') }}
+    runs-on: ubuntu-latest
     steps:
       - name: Be test
         run: |
-          echo "BE change detected"
+          echo "BE change detected ${{ secrets.test_val}"
+          echo "BE change detected ${{ secrets.test_val2}"
+          echo "BE change detected ${{ secrets.test_val3}"
 
-  fe:
-    runs-on: noobie-runner
-    if: ${{ contains( github.event.head_commit.modified, 'fe/') }}
-    steps:
-      - name: Fe test
-        run: |
-          echo "FE change detected"
-  job1:
-    runs-on: noobie-runner
-
-    steps:
-      - name: step1
-        run: |
-          echo "I'm in job 1 and and stage 1"
-
-      - name: step2
-        run: |
-          echo "I'm in job 1 and and stage 2"
-
-  job2:
-    runs-on: noobie-runner
-    needs: job1
-    environment:
-      name: dev
-
-    steps:
-      - name: step1
-        run: |
-          echo "I'm in job 2 and and stage 1"
-
-      - name: step2
-        run: |
-          echo "I'm in job 2 and and stage 2"
-
-  job3:
-    runs-on: noobie-runner
-    needs: job2
-    environment:
-      name: deploy
-
-    steps:
-      - name: step1
-        run: |
-          echo "I'm in job 2 and and stage 1"
-
-      - name: step2
-        run: |
-          echo "I'm in job 2 and and stage 2"
+  
